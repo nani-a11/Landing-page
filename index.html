@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,700&display=swap");
+        :root {
+            --normal-font: 400;
+            --bold-font: 700;
+            --bolder-font: 900;
+            --primary-color: blue;
+            --secondary-color: red;
+            --line-height: 1.7rem;
+            --transition: 0.4s ease-in;
+            --dark-bg: #212121;
+            --dark-text: #ffffff;
+            --dark-nav-bg: #1f1f1f;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: "Roboto", sans-serif;
+        }
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        body.dark-mode nav {
+            background: var(--dark-nav-bg);
+        }
+        body.dark-mode .begin {
+            color: var(--secondary-color);
+        }
+        body.dark-mode .xy {
+            color: var(--primary-color);
+        }
+        body.dark-mode .fa-brands {
+            color: #f1f1f1;
+        }
+        body.dark-mode ul {
+            color: var(--dark-text);
+        }
+        body.dark-mode a {
+            color: var(--dark-text);
+        }
+        body.dark-mode a:hover {
+            color: var(--secondary-color);
+        }
+        a {
+            text-decoration: none;
+            color:black;
+        }
+        a:hover {
+            color: var(--secondary-color);
+        }
+        .begin {
+            color: var(--primary-color);
+        }
+        .xy {
+            color: var(--secondary-color);
+        }
+        ul li {
+            list-style-type: none;
+        }
+        nav {
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            box-shadow: 2px 3px 2px #f1f1f1;
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 500;
+        }
+        ul {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-item {
+            margin-left: 2rem;
+        }
+        .nav-link {
+            font-weight: var(--bold-font);
+        }
+        #toggle {
+            width: 30px;
+            cursor: pointer;
+        }
+        .menu {
+            display: none;
+        }
+        @media screen and (max-width: 768px) {
+            .menu {
+                display: block;
+                cursor: pointer;
+            }
+            ul {
+                background-color: #5422b9;
+                flex-direction: column;
+                position: fixed;
+                left: 100%;
+                top: 5rem;
+                width: 100%;
+                text-align: center;
+            }
+            ul.active {
+                left: 0;
+            }
+            .nav-item {
+                margin: 2rem 0;
+            }
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(10px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-10px) rotate(-45deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">
+            <h1>
+                <span style="color: black;"><i class="fa-brands fa-xing"></i></span>
+                <span class="begin">Begin</span>
+                <span class="xy">XY</span>
+            </h1>
+        </a>
+        <span id="toggle"><i class="fa-solid fa-moon"></i></span>
+        <ul>
+            <li class="nav-item">
+                <a href="#home" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#about" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#blog" class="nav-link">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a href="#contact" class="nav-link">Contact</a>
+            </li>
+        </ul>
+        <div class="menu">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+    <script>
+        const toggle = document.getElementById('toggle');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const menu = document.querySelector('.menu');
+        const ul = document.querySelector('ul');
+        
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            toggle.querySelector('i').classList.toggle('fa-moon');
+            toggle.querySelector('i').classList.toggle('fa-sun');
+        });
+
+        menu.addEventListener('click', () => {
+            ul.classList.toggle('active');
+            menu.querySelector('i').classList.toggle('fa-bars');
+            menu.querySelector('i').classList.toggle('fa-times');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                ul.classList.remove('active');
+                menu.querySelector('i').classList.add('fa-bars');
+                menu.querySelector('i').classList.remove('fa-times');
+            });
+        });
+    </script>
+</body>
+</html>
